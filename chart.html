@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web-programozás-1 Előadás Házi feladat</title>
+    <link rel="stylesheet" href="szepike.css">
+    
+</head>
+<body>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Főoldal</a></li>
+            <li><a href="tabla.html">Táblázat</a></li>
+            <li><a href="Html5.html">HTML5 API</a></li>
+            <li><a href="index.html" class="active">ChartJS</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        
+        
+        <div class="content">
+            <p>
+                <table id="data-table" border="1" style="border-collapse: collapse; width: 100%; cursor: pointer;">
+                    <tbody>
+                        <tr><td>10</td><td>20</td><td>30</td><td>40</td><td>50</td></tr>
+                        <tr><td>50</td><td>40</td><td>30</td><td>20</td><td>10</td></tr>
+                        <tr><td>12</td><td>22</td><td>32</td><td>22</td><td>12</td></tr>
+                        <tr><td>50</td><td>28</td><td>38</td><td>1</td><td>3</td></tr>
+                        <tr><td>20</td><td>30</td><td>40</td><td>50</td><td>60</td></tr>
+                    </tbody>
+                </table>
+                
+                <canvas id="myChart" width="400" height="200" style="margin-top: 20px;"></canvas>
+                
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    let chart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['1', '2', '3', '4', '5'],
+                            datasets: [{
+                                label: 'Kiválasztott sor adatai',
+                                data: [],
+                                borderColor: 'blue',
+                                backgroundColor: 'lightblue',
+                                fill: false,
+                                tension: 0.2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: { display: true }
+                            },
+                            scales: {
+                                y: { beginAtZero: true }
+                            }
+                        }
+                    });
+                
+                    document.querySelectorAll("#data-table tr").forEach(row => {
+                        row.addEventListener("click", () => {
+                            const values = Array.from(row.querySelectorAll("td")).map(td => parseInt(td.textContent));
+                            chart.data.datasets[0].data = values;
+                            chart.update();
+                        });
+                    });
+                </script>
+                
+            </p>
+    </div>
+    
+    <footer>
+        <p>Készítette: [Hunyadi Krisztofer & Kirilla József] - Neptun kód: [LE3O8X-FWN10Y]</p>
+    </footer>
+    
+    
+</body>
+</html>

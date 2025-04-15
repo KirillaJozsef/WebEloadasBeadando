@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web-programozás-1 Előadás Házi feladat</title>
+    <link rel="stylesheet" href="szepike.css">
+</head>
+<body>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Főoldal</a></li>
+            <li><a href="tabla.html">Táblázat</a></li>
+            <li><a href="html5.html">HTML5 API</a></li>
+            <li><a href="chart.html">ChartJS</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="index.html" class="active">OOJS</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        
+        
+        <div class="content">
+            <h2>OOJS menü</h2>
+            <p>Feladatlista: </p>
+            <input type="text" id="taskInput" placeholder="Új feladat...">
+            <button id="addTaskBtn">Hozzáadás</button>
+            <ul id="taskList"></ul>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Készítette: [Hunyadi Krisztofer & Kirilla József] - Neptun kód: [LE3O8X-FWN10Y]</p>
+    </footer>
+
+    <script>
+        
+        class Task {
+            constructor(text) {
+                this.text = text;
+                this.completed = false;
+            }
+
+            toggle() {
+                this.completed = !this.completed;
+            }
+
+            createListItem() {
+                const li = document.createElement('li');
+                li.textContent = this.text;
+                li.style.cursor = 'pointer';
+                li.style.textDecoration = this.completed ? 'line-through' : 'none';
+                li.addEventListener('click', () => {
+                    this.toggle();
+                    li.style.textDecoration = this.completed ? 'line-through' : 'none';
+                });
+                return li;
+            }
+        }
+
+        
+        class LoggedTask extends Task {
+            constructor(text) {
+                super(text);
+                console.log(`Új feladat létrehozva: ${text}`);
+            }
+        }
+
+        
+        class TaskList {
+            constructor() {
+                this.tasks = [];
+                this.listElement = document.getElementById('taskList');
+            }
+
+            addTask(taskText) {
+                const task = new LoggedTask(taskText);
+                this.tasks.push(task);
+                const li = task.createListItem();
+                this.listElement.appendChild(li);
+            }
+        }
+
+        
+        const taskList = new TaskList();
+        document.getElementById('addTaskBtn').addEventListener('click', () => {
+            const input = document.getElementById('taskInput');
+            const value = input.value.trim();
+            if (value) {
+                taskList.addTask(value);
+                input.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
