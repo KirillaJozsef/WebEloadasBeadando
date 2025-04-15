@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag And Drop</title>
+    <link rel="stylesheet" href="szepike.css">
+</head>
+<body>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html" >Főoldal</a></li>
+            <li><a href="tabla.html">Táblázat</a></li>
+            <li><a href="Html5.html" class="active">HTML5 API</a></li>
+            <li><a href="chart.html">ChartJS</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        
+        
+        <div class="content">
+            <h2>Drag And Drop</h2>
+            <p>
+                <div id="origin" style="width: 300px; height: 200px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                    Dobd ide 1
+                </div>
+                
+                <div id="dropzone" style="width: 300px; height: 200px; border: 2px dashed #aaa; display: flex; align-items: center; justify-content: center;">
+                    Dobd ide 2
+                </div>
+                
+                <div id="draggable" draggable="true" style="width: 100px; height: 100px; background-color: #3498db; color: white; display: flex; align-items: center; justify-content: center; cursor: grab; margin-top: 20px;">
+                    Húzz engem
+                </div>
+                
+                <script>
+                    const draggable = document.getElementById("draggable");
+                    const origin = document.getElementById("origin");
+                    const dropzone = document.getElementById("dropzone");
+                
+                    draggable.addEventListener("dragstart", function (e) {
+                        e.dataTransfer.setData("text/plain", draggable.id);
+                    });
+                
+                    [origin, dropzone].forEach(zone => {
+                        zone.addEventListener("dragover", function (e) {
+                            e.preventDefault();
+                        });
+                
+                        zone.addEventListener("drop", function (e) {
+                            e.preventDefault();
+                            const id = e.dataTransfer.getData("text/plain");
+                            const element = document.getElementById(id);
+                            zone.appendChild(element);
+                        });
+                    });
+                </script>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    
+
+    <footer>
+        <p>Készítette: [Hunyadi Krisztofer & Kirilla József] - Neptun kód: [LE3O8X-FWN10Y]</p>
+    </footer>
+    
+</body>
+</html>

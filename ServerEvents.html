@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web-programozás-1 Előadás Házi feladat</title>
+    <link rel="stylesheet" href="szepike.css">
+</head>
+<body>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html" >Főoldal</a></li>
+            <li><a href="tabla.html">Táblázat</a></li>
+            <li><a href="Html5.html" class="active">HTML5 API</a></li>
+            <li><a href="chart.html">ChartJS</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        
+        <p>
+            <button onclick="startSSE()">Indítás</button>
+            <div id="sseData">Várakozás az adatra...</div>
+            
+            <script>
+                let eventSource;
+            
+                function startSSE() {
+                    if (typeof(EventSource) !== "undefined") {
+                        if (!eventSource) {
+                            eventSource = new EventSource("serverevents2.php");
+                            eventSource.onmessage = function(event) {
+                                document.getElementById("sseData").innerHTML = "Szerver üzenete: " + event.data;
+                            };
+                        }
+                    } else {
+                        document.getElementById("sseData").innerHTML = " A böngésződ nem támogatja a Server-Sent Events-et.";
+                    }
+                }
+            </script>
+            
+        </p>
+        
+    </div>
+    
+    
+
+    <footer>
+        <p>Készítette: [Hunyadi Krisztofer & Kirilla József] - Neptun kód: [LE3O8X-FWN10Y]</p>
+    </footer>
+    
+</body>
+</html>

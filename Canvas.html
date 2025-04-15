@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <link rel="stylesheet" href="szepike.css">
+</head>
+<body>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html" >Főoldal</a></li>
+            <li><a href="tabla.html">Táblázat</a></li>
+            <li><a href="Html5.html" class="active">HTML5 API</a></li>
+            <li><a href="chart.html">ChartJS</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        
+        
+        <div class="content">
+            <h2>Canvas</h2>
+            <p>
+                <canvas id="myCanvas" width="400" height="300" style="border:1px solid #000; cursor: crosshair;"></canvas>
+                <br>
+                <button onclick="clearCanvas()" style="margin-top: 10px;">Törlés</button>
+            </p>
+        </div>
+    </div>
+                <script>
+                    const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+                    let drawing = false;
+                
+                    canvas.addEventListener("mousedown", () => drawing = true);
+                    canvas.addEventListener("mouseup", () => drawing = false);
+                    canvas.addEventListener("mouseleave", () => drawing = false);
+                
+                    canvas.addEventListener("mousemove", (e) => {
+                        if (!drawing) return;
+                        const rect = canvas.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        ctx.fillStyle = "#2c3e50";
+                        ctx.beginPath();
+                        ctx.arc(x, y, 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                
+                    function clearCanvas() {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    }
+                </script>
+                
+            </p>
+
+    <footer>
+        <p>Készítette: [Hunyadi Krisztofer & Kirilla József] - Neptun kód: [LE3O8X-FWN10Y]</p>
+    </footer>
+    
+</body>
+</html>

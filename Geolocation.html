@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation API</title>
+    <link rel="stylesheet" href="szepike.css">
+</head>
+<body>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html" >Főoldal</a></li>
+            <li><a href="tabla.html">Táblázat</a></li>
+            <li><a href="Html5.html" class="active">HTML5 API</a></li>
+            <li><a href="chart.html">ChartJS</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        
+        <div class="content">
+            <h2>Geolocation</h2>
+            <p>
+                <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+                <div id="map" style="height: 400px;"></div>
+                <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+                <script>
+                    if ("geolocation" in navigator) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
+                            const map = L.map('map').setView([lat, lon], 13);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '© OpenStreetMap hozzájárulók'
+                            }).addTo(map);
+                            L.marker([lat, lon]).addTo(map)
+                                .bindPopup('Itt vagy most!')
+                                .openPopup();
+                        }, function(error) {
+                            document.getElementById("map").innerHTML = "Hiba: " + error.message;
+                        });
+                    } else {
+                        document.getElementById("map").innerHTML = "A böngésződ nem támogatja a Geolocation API-t.";
+                    }
+                </script>
+                
+            </p>
+        </div>
+    </div>
+    
+    
+
+    <footer>
+        <p>Készítette: [Hunyadi Krisztofer & Kirilla József] - Neptun kód: [LE3O8X-FWN10Y]</p>
+    </footer>
+
+</body>
+</html>

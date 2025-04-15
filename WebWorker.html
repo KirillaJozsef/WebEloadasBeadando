@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="szepike.css">
+    <title>Web-Worker</title>
+</head>
+<body>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html" >Főoldal</a></li>
+            <li><a href="tabla.html">Táblázat</a></li>
+            <li><a href="Html5.html" class="active">HTML5 API</a></li>
+            <li><a href="chart.html">ChartJS</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        
+
+        <div class="content">
+            <h2>Üdvözöllek a Web-programozás-1 házi feladat oldalán!</h2>
+            <p>
+                <button onclick="startCounter()">Indítás</button>
+                <button onclick="stopCounter()">Leállítás</button>
+                <button onclick="sendMessage()">Üzenet küldése</button>
+                <p id="counter">Számláló itt jelenik meg...</p>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Készítette: [Hunyadi Krisztofer & Kirilla József] - Neptun kód: [LE3O8X-FWN10Y]</p>
+    </footer>
+
+    <script>
+        let worker;
+
+        function startCounter() {
+            if (typeof(Worker) !== "undefined") {
+                if (!worker) {
+                    worker = new Worker("webworker2.js");
+                    worker.onmessage = function(event) {
+                        document.getElementById("counter").innerText = "Számláló: " + event.data;
+                    };
+                }
+            } else {
+                document.getElementById("counter").innerText = "A böngésződ nem támogatja a Web Workert.";
+            }
+        }
+
+        function stopCounter() {
+            if (worker) {
+                worker.terminate();
+                worker = null;
+                document.getElementById("counter").innerText = "Leállítva.";
+            }
+        }
+
+        function sendMessage() {
+            alert("Menő Mi ? :D");
+        }
+    </script>
+</body>
+</html>
