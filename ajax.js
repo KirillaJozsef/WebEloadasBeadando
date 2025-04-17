@@ -1,13 +1,13 @@
-    const le3o8x = "Valami012345678";
+    const userCode = "LE3O8Xvalami1111111";
     const apiUrl = "http://gamf.nhely.hu/ajax2/";
 
     // Szerver oldali adatlekérés
     function fetchData() {
       const httpRequest = new XMLHttpRequest();
-      document.getElementById("le3o8x").innerHTML = "Code: " + le3o8x;
+      document.getElementById("userCode").innerHTML = "Code: " + userCode;
       httpRequest.open("POST", apiUrl, true);
       httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      let params = "code=" + le3o8x + "&op=read";
+      let params = "code=" + userCode + "&op=read";
 
       httpRequest.onreadystatechange = () => {
         if (httpRequest.readyState === 4 && httpRequest.status === 200) {
@@ -34,7 +34,7 @@
         const httpRequest = new XMLHttpRequest();
         httpRequest.open("POST", apiUrl, true);
         httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        const params = `code=${le3o8x}&op=create&name=${name}&height=${height}&weight=${weight}`;
+        const params = `code=${userCode}&op=create&name=${name}&height=${height}&weight=${weight}`;
 
         httpRequest.onreadystatechange = () => {
           if (httpRequest.readyState === 4 && httpRequest.status === 200) {
@@ -59,7 +59,7 @@
         const httpRequest = new XMLHttpRequest();
         httpRequest.open("POST", apiUrl, true);
         httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        const params = `code=${le3o8x}&op=update&id=${id}&name=${name}&height=${height}&weight=${weight}`;
+        const params = `code=${userCode}&op=update&id=${id}&name=${name}&height=${height}&weight=${weight}`;
 
         httpRequest.onreadystatechange = () => {
           if (httpRequest.readyState === 4 && httpRequest.status === 200) {
@@ -81,7 +81,7 @@
         const httpRequest = new XMLHttpRequest();
         httpRequest.open("POST", apiUrl, true);
         httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        const params = `code=${le3o8x}&op=delete&id=${id}`;
+        const params = `code=${userCode}&op=delete&id=${id}`;
 
         httpRequest.onreadystatechange = () => {
           if (httpRequest.readyState === 4 && httpRequest.status === 200) {
@@ -103,7 +103,7 @@
         const httpRequest = new XMLHttpRequest();
         httpRequest.open("POST", apiUrl, true);
         httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        const params = `code=${le3o8x}&op=read`;
+        const params = `code=${userCode}&op=read`;
 
         httpRequest.onreadystatechange = () => {
           if (httpRequest.readyState === 4 && httpRequest.status === 200) {
